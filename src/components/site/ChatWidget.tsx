@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, X, Phone, Mail } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 /**
  * Sticky chat affordance, visible on every page. Opens a small card with
@@ -29,12 +30,12 @@ export function ChatWidget() {
             >
               <Mail size={15} aria-hidden /> info@dhruvija.com
             </a>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="flex items-center justify-center bg-foreground px-3 py-2.5 text-background hover:bg-foreground/85 transition-colors"
             >
               Send us a message
-            </a>
+            </Link>
           </div>
         </div>
       )}
