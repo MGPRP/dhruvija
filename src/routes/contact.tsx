@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import contactHero from "@/assets/contact-hero.jpg?format=webp&quality=80";
 
 
@@ -32,6 +32,10 @@ const mapSrc =
 const mapLink =
   "https://www.google.com/maps?ll=12.986464,77.576253&z=16&t=m&hl=en-US&gl=US&mapclient=embed&cid=4007870070183098874";
 
+/* ---------- Leads ---------- */
+// PHP handler that saves and emails the lead, then redirects to /thankyou.
+const LEADS_ENDPOINT = "https://bizbucks.in/demo/Dhruvija-Properties/contact.php";
+
 /* ---------- Validation ---------- */
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
 
@@ -59,7 +63,7 @@ type Values = { name: string; email: string; phone: string };
 type Touched = { name: boolean; email: boolean; phone: boolean };
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [values, setValues] = useState<Values>({ name: "", email: "", phone: "" });
   const [touched, setTouched] = useState<Touched>({ name: false, email: false, phone: false });
 
@@ -79,13 +83,23 @@ function Contact() {
     setTouched((t) => ({ ...t, [field]: true }));
   };
 
+  // Re-enable the button if the visitor comes back from the thank-you page via the browser's back button.
+  useEffect(() => {
+    const reset = (e: PageTransitionEvent) => e.persisted && setSubmitting(false);
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
+  }, []);
+
   const handleBlur = (field: keyof Values) => setTouched((t) => ({ ...t, [field]: true }));
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Valid forms post straight to the PHP handler, which emails the lead and redirects to the thank-you page.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setTouched({ name: true, email: true, phone: true });
-    if (!isValid) return;
-    setSent(true);
+    if (!isValid || submitting) {
+      e.preventDefault();
+      return;
+    }
+    setSubmitting(true);
   };
 
   return (
@@ -124,6 +138,8 @@ function Contact() {
         <div className="max-w-[1100px] mx-auto grid md:grid-cols-12 gap-5">
           {/* Form */}
           <form
+            action={LEADS_ENDPOINT}
+            method="POST"
             noValidate
             onSubmit={handleSubmit}
             className="md:col-span-7 rounded-none bg-card border border-border p-6 md:p-8 space-y-5"
@@ -133,60 +149,55 @@ function Contact() {
               <h2 className="mt-3 font-display text-xl md:text-2xl">Write a few lines.</h2>
               <p className="mt-2 text-sm text-foreground/70">We usually reply within a working day, sometimes with a question, sometimes with a floor plan.</p>
             </div>
-            {sent ? (
-              <p className="rounded-2xl bg-background border border-border p-5 text-sm">Thanks, we'll be in touch shortly. ✿</p>
-            ) : (
-              <>
-                <Field
-                  label="Your name"
-                  name="name"
-                  value={values.name}
-                  error={touched.name ? errors.name : ""}
-                  onChange={(v) => handleChange("name", v)}
-                  onBlur={() => handleBlur("name")}
-                  autoComplete="name"
-                />
-                <Field
-                  label="Email"
-                  name="email"
-                  type="email"
-                  value={values.email}
-                  error={touched.email ? errors.email : ""}
-                  onChange={(v) => handleChange("email", v)}
-                  onBlur={() => handleBlur("email")}
-                  autoComplete="email"
-                />
-                <Field
-                  label="Phone"
-                  name="phone"
-                  type="tel"
-                  inputMode="numeric"
-                  maxLength={10}
-                  value={values.phone}
-                  error={touched.phone ? errors.phone : ""}
-                  onChange={(v) => handleChange("phone", v)}
-                  onBlur={() => handleBlur("phone")}
-                  autoComplete="tel-national"
-                />
-                <div className="space-y-2">
-                  <label htmlFor="message" className="font-mono text-[0.65rem] uppercase tracking-widest text-foreground/90">
-                    Tell us a little <span className="normal-case tracking-normal text-foreground/50">(optional)</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="rounded-full bg-foreground text-background px-5 py-2.5 text-sm hover:bg-foreground/85 transition-all hover:scale-[1.02]"
-                >
-                  Submit your Interest
-                </button>
-              </>
-            )}
+            <Field
+              label="Your name"
+              name="name"
+              value={values.name}
+              error={touched.name ? errors.name : ""}
+              onChange={(v) => handleChange("name", v)}
+              onBlur={() => handleBlur("name")}
+              autoComplete="name"
+            />
+            <Field
+              label="Email"
+              name="email"
+              type="email"
+              value={values.email}
+              error={touched.email ? errors.email : ""}
+              onChange={(v) => handleChange("email", v)}
+              onBlur={() => handleBlur("email")}
+              autoComplete="email"
+            />
+            <Field
+              label="Phone"
+              name="phone"
+              type="tel"
+              inputMode="numeric"
+              maxLength={10}
+              value={values.phone}
+              error={touched.phone ? errors.phone : ""}
+              onChange={(v) => handleChange("phone", v)}
+              onBlur={() => handleBlur("phone")}
+              autoComplete="tel-national"
+            />
+            <div className="space-y-2">
+              <label htmlFor="message" className="font-mono text-[0.65rem] uppercase tracking-widest text-foreground/90">
+                Tell us a little <span className="normal-case tracking-normal text-foreground/50">(optional)</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="rounded-full bg-foreground text-background px-5 py-2.5 text-sm hover:bg-foreground/85 transition-all hover:scale-[1.02] disabled:opacity-60 disabled:pointer-events-none"
+            >
+              {submitting ? "Sending…" : "Submit your Interest"}
+            </button>
           </form>
 
           {/* Info */}
