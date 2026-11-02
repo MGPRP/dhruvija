@@ -48,7 +48,7 @@ const albums: { folder: string; title: string; caption: string; order?: string[]
     caption: "Bhoomi Pooja",
     order: [
       // pooja
-      "0E8A1792", "DJI_20260830123004_0079_D", "0E8A2010", "0E8A1799",
+      "0E8A1792", "0E8A1799", "DJI_20260830123004_0079_D", "0E8A2010",
       // model elevation
       "0E8A1665", "0E8A2220", "0E8A2290", "I18A6186", "I18A6356",
       // discussions & brochures
@@ -64,7 +64,7 @@ const albums: { folder: string; title: string; caption: string; order?: string[]
     caption: "Model Home",
     order: [
       // living & dining
-      "I18A4198", "I18A6058", "I18A6082", "I18A6086", "I18A4204", "I18A4264", "I18A6090", "I18A6069",
+       "I18A6082", "I18A6086", "I18A4204", "I18A4264", "I18A6090", "I18A6069","I18A4198", "I18A6058",
       // kitchen
       "I18A4249", "I18A4253", "I18A6072",
       // bedrooms

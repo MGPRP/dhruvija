@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Linkedin, Youtube, type LucideIcon } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Youtube, type LucideIcon } from "lucide-react";
 
 // Leave href empty until the profile URL is available; the icon then shows as "coming soon".
 const socials: { label: string; href: string; Icon: LucideIcon }[] = [
@@ -67,7 +67,15 @@ export function Footer() {
               <li><a href="tel:+919535624443" className="hover:text-butter">+91 95356 24443</a></li>
               <li><a href="tel:08041487175" className="hover:text-butter">080 - 4148 7175</a></li>
               <li><a href="tel:08029901062" className="hover:text-butter">080 - 2990 1062</a></li>
-              <li><a href="mailto:hr@dhruvija.com" className="hover:text-butter">Careers</a></li>
+              <li className="pt-2">
+                <a
+                  href="mailto:hr@dhruvija.com?subject=Career%20enquiry"
+                  className="inline-flex items-center gap-2 border border-butter/60 px-4 py-2 text-sm text-background hover:bg-butter hover:text-ink transition-colors"
+                >
+                  <Mail className="size-4" aria-hidden />
+                  Careers · Email us
+                </a>
+              </li>
             </ul>
           </div>
         </div>
