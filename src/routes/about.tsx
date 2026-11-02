@@ -3,6 +3,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import aboutHero from "@/assets/about-hero.jpg?format=webp&quality=80";
 import chapterName from "@/assets/about-chapter-name.jpg?format=webp&quality=80";
+import ethosPlot from "@/assets/plot-image.jpg?w=1600&format=webp&quality=80";
 import { Reveal } from "@/components/site/Reveal";
 import founderAsset from "@/assets/narasimhamurthy.jpg";
 import ceoAsset from "@/assets/purushothama.jpg";
@@ -112,6 +113,11 @@ function About() {
             <p className="mt-5 text-sm text-foreground/70">
               Two compass points that guide every Plot, Plan and Promise we make.
             </p>
+            <div className="mt-8 bg-background border border-border rounded-none p-2.5">
+              <div className="rounded-[1.15rem] overflow-hidden aspect-[4/3]">
+                <img src={ethosPlot} alt="Aerial view of open farm plots under a clear sky" loading="lazy" width={1600} height={900} className="size-full object-cover" />
+              </div>
+            </div>
           </div>
           <div className="md:col-span-7 grid gap-5">
             <Reveal className="rounded-none bg-background border border-border p-2.5">

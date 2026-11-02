@@ -26,31 +26,69 @@ const allImages = import.meta.glob(
   { eager: true, query: "?url", import: "default" },
 ) as Record<string, string>;
 
-// `folder` must match the folder name inside src/assets/gallery exactly
-const albums = [
-  { folder: "Dhrumini Vatika - Launch", title: "Dhrumini Vatika", caption: "Launch" },
-  { folder: "Dhruvija Gopura - Bhoomi Pooja", title: "Dhruvija Gopura", caption: "Bhoomi Pooja" },
+// `folder` must match the folder name inside src/assets/gallery exactly.
+// `order` lists file names in display order; files not listed follow, sorted by name.
+const albums: { folder: string; title: string; caption: string; order?: string[] }[] = [
+  {
+    folder: "Dhrumini Vatika - Launch",
+    title: "Dhrumini Vatika",
+    caption: "Launch",
+    order: [
+      // launch event
+      "0E8A8825", "I18A5193", "I18A5325", "I18A5356", "I18A5432", "I18A5449",
+      // elevations
+      "I18A4756", "IMG_8334", "IMG_8340", "IMG_8342",
+      // bedrooms
+      "IMG_8346", "IMG_8350",
+    ],
+  },
+  {
+    folder: "Dhruvija Gopura - Bhoomi Pooja",
+    title: "Dhruvija Gopura",
+    caption: "Bhoomi Pooja",
+    order: [
+      // pooja
+      "0E8A1792", "DJI_20260830123004_0079_D", "0E8A2010", "0E8A1799",
+      // model elevation
+      "0E8A1665", "0E8A2220", "0E8A2290", "I18A6186", "I18A6356",
+      // discussions & brochures
+      "0E8A1628", "0E8A1943", "0E8A2222", "0E8A2422", "0E8A2426", "I18A6261", "I18A6339", "I18A6347", "I18A6388", "I18A6935",
+      // signing & bouquet
+      "I18A7011", "I18A7016",
+    ],
+  },
   { folder: "Dhruvija Gopura - Channel Partner Meet", title: "Dhruvija Gopura", caption: "Channel Partner Meet" },
-  { folder: "Dhruvija Gopura - Model Home", title: "Dhruvija Gopura", caption: "Model Home" },
+  {
+    folder: "Dhruvija Gopura - Model Home",
+    title: "Dhruvija Gopura",
+    caption: "Model Home",
+    order: [
+      // living & dining
+      "I18A4198", "I18A6058", "I18A6082", "I18A6086", "I18A4204", "I18A4264", "I18A6090", "I18A6069",
+      // kitchen
+      "I18A4249", "I18A4253", "I18A6072",
+      // bedrooms
+      "I18A4216", "I18A4218", "I18A6061", "I18A6046", "I18A6065", "I18A4285", "I18A6103", "I18A6092", "I18A6095", "I18A6105",
+      // bathrooms
+      "I18A4229", "I18A4311", "I18A6050",
+    ],
+  },
 ];
 
-const video = {
-  video: "https://www.youtube.com/embed/jhoGCuS4uZ0",
-  title: "Dhruvija Properties",
-  caption: "A short film · Bengaluru",
-  tint: "bg-background border border-border",
-};
-
-function imagesFor(folder: string) {
+function imagesFor(folder: string, order: string[] = []) {
+  const rank = (path: string) => {
+    const i = order.indexOf(path.split("/").pop()!.replace(/\.webp$/i, ""));
+    return i === -1 ? order.length : i;
+  };
   return Object.entries(allImages)
     .filter(([path]) => path.startsWith(`/src/assets/gallery/${folder}/`))
-    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .sort(([a], [b]) => rank(a) - rank(b) || a.localeCompare(b, undefined, { numeric: true }))
     .map(([, url]) => url);
 }
 
 function Gallery() {
   const albumData = useMemo(
-    () => albums.map((a) => ({ ...a, images: imagesFor(a.folder) })),
+    () => albums.map((a) => ({ ...a, images: imagesFor(a.folder, a.order) })),
     [],
   );
 
@@ -95,7 +133,7 @@ function Gallery() {
             A walk-through, <span className="">frame by frame.</span>
           </Reveal>
           <Reveal as="p" delay={240} className="mt-6 text-base text-foreground/70 max-w-2xl">
-            Photographs and short films from projects across Bengaluru. More visuals
+            Photographs from projects across Bengaluru. More visuals
             are being added as our newer developments come to life.
           </Reveal>
         </div>
@@ -103,34 +141,11 @@ function Gallery() {
 
       <section className="px-6 md:px-12 pb-24">
         <div className="max-w-[1200px] mx-auto grid gap-5 md:grid-cols-2">
-          {/* YouTube film (unchanged) */}
-          <Reveal
-            key={video.title}
-            delay={0}
-            className={`${video.tint} md:col-span-2 rounded-none p-2.5 hover-zoom transition-transform hover:-translate-y-1.5`}
-          >
-            <div className="relative rounded-none overflow-hidden aspect-[4/3] md:aspect-[16/7]">
-              <iframe
-                src={video.video}
-                title={video.title}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="size-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-shade/80 via-shade/10 to-transparent pointer-events-none" />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-background pointer-events-none">
-                <div className="font-display text-xl md:text-2xl">{video.title}</div>
-                <p className="mt-1 text-sm text-background/85">{video.caption}</p>
-              </div>
-            </div>
-          </Reveal>
-
           {/* Album cards */}
           {albumData.map((al, i) => (
             <Reveal
               key={al.folder}
-              delay={(i + 1) * 120}
+              delay={i * 120}
               className={`bg-background border border-border rounded-none p-2.5 hover-zoom transition-transform hover:-translate-y-1.5 cursor-pointer ${
                 activeAlbum === i ? "ring-1 ring-clay" : ""
               }`}

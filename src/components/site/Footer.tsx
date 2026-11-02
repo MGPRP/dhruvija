@@ -67,12 +67,7 @@ export function Footer() {
               <li><a href="tel:+919535624443" className="hover:text-butter">+91 95356 24443</a></li>
               <li><a href="tel:08041487175" className="hover:text-butter">080 - 4148 7175</a></li>
               <li><a href="tel:08029901062" className="hover:text-butter">080 - 2990 1062</a></li>
-              <li>
-                Want to build your career with us, email us at -{" "}
-                <a href="mailto:info@dhruvija.com" className="hover:text-butter">info@dhruvija.com</a>
-                {" "}or{" "}
-                <a href="mailto:hr@dhruvija.com" className="hover:text-butter">hr@dhruvija.com</a>.
-              </li>
+              <li><a href="mailto:hr@dhruvija.com" className="hover:text-butter">Careers</a></li>
             </ul>
           </div>
         </div>

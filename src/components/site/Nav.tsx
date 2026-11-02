@@ -27,7 +27,7 @@ export function Nav() {
             alt="Dhruvija Properties"
             width={640}
             height={200}
-            className="h-24 md:h-22 w-auto object-contain"
+            className="h-24 md:h-28 w-auto object-contain"
           />
           <span aria-hidden className="hidden md:block h-9 w-px bg-logo-properties/20" />
         </Link>

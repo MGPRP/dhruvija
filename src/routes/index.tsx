@@ -203,6 +203,7 @@ function Home() {
                 loc: "North Bengaluru",
                 blurb: "In the heart of a city that never stops dreaming, rises a marvel that redefines what it means to live above and beyond, a sanctuary sculpted in glass, steel and sky.",
                 img: gopura,
+                rera: "PRM/KA/RERA/1251/309/PR/300626/008778",
                 tint: "bg-background border border-border",
                 href: "https://dhruvijagopura.com/",
               },
@@ -219,12 +220,17 @@ function Home() {
             ].map((p, i) => (
               <Reveal key={p.num} delay={i * 100} as="article" className="group grid md:grid-cols-12 gap-4 items-stretch">
                 <div className={`md:col-span-7 ${p.tint} rounded-none p-2.5 hover-zoom`}>
-                  <div className={`rounded-none overflow-hidden bg-background flex items-center justify-center ${p.name === "Holiday Inn Express" ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
+                  <div className={`relative rounded-none overflow-hidden bg-background flex items-center justify-center ${p.name === "Holiday Inn Express" ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
                     {p.img ? (
                       <img src={p.img} alt={p.name} loading="lazy" width={1024} height={1024} className="size-full object-cover" />
                     ) : (
                       <span className="font-display text-lg md:text-xl text-clay/70 ">image to be updated</span>
                     )}
+                    {p.rera ? (
+                      <span className="absolute top-2 right-2 md:top-3 md:right-3 max-w-[calc(100%-1rem)] bg-background/90 backdrop-blur-sm px-2 py-1 font-mono text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-foreground">
+                        RERA: {p.rera}
+                      </span>
+                    ) : null}
                   </div>
                 </div>
                 <div className="md:col-span-5 flex flex-col justify-between rounded-none bg-card border border-border p-6">
@@ -287,7 +293,7 @@ function Home() {
 
       {/* CTA */}
       <section className="px-6 md:px-12 py-16 md:py-24">
-        <div className="max-w-[820px] mx-auto text-center border border-ink/40 px-6 md:px-12 py-12">
+        <div className="max-w-[820px] mx-auto text-center border border-butter/50 bg-butter/15 px-6 md:px-12 py-12">
           <span className="font-mono text-[0.7rem] uppercase tracking-widest text-ink font-semibold">Connect</span>
           <div className="mx-auto mt-4 h-px w-16 bg-butter" />
           <h2 className="mt-5 font-display text-2xl md:text-4xl leading-[1.02]">
@@ -297,7 +303,7 @@ function Home() {
           <p className="mt-5 text-sm text-foreground/85 max-w-md mx-auto">
             The best way to understand a Dhruvija project is to stand in it, feel the breeze, the layout, the quiet logic of the planning.
           </p>
-          <Link to="/contact" className="mt-7 inline-flex items-center gap-2 border border-ink/40 px-5 py-2.5 text-sm text-foreground hover:bg-butter hover:border-butter transition-colors">
+          <Link to="/contact" className="mt-7 inline-flex items-center gap-2 border border-ink/40 bg-background px-5 py-2.5 text-sm text-foreground hover:bg-butter hover:border-butter transition-colors">
             Plan a visit →
           </Link>
         </div>

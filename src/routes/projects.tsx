@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import projectsHero from "@/assets/projects-hero.jpg?format=webp&quality=80";
+import projectsHero from "@/assets/vatika-new.jpg?format=webp&quality=80";
 import theResidencesAsset from "@/assets/the-residences.jpg";
 import grandeAsset from "@/assets/grande.jpg";
 import prosperAsset from "@/assets/prosper.jpg";
@@ -54,6 +54,7 @@ const ongoing = [
     tag: "Residential · Bengaluru",
     blurb: "Bengaluru's newest architectural icon, a sanctuary sculpted in glass, steel and sky, floating proudly above the city skyline.",
     img: gopura,
+    rera: "PRM/KA/RERA/1251/309/PR/300626/008778",
     href: "https://dhruvijagopura.com/",
   },
   {
@@ -137,12 +138,12 @@ function Projects() {
       <section className="relative min-h-[100svh] w-full overflow-hidden">
         <img
           src={projectsHero}
-          alt="Aerial view of a tree-lined plotted community at golden hour"
+          alt="Entrance gateway of Dhrumini Vatika luxury farm plots"
           className="absolute inset-0 size-full object-cover"
           fetchPriority="high"
           decoding="async"
           width={1600}
-          height={1008}
+          height={900}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-shade/45 via-shade/10 to-shade/70" />
         <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-6 md:px-14 pt-28 pb-10 text-background max-w-[1400px] mx-auto">
@@ -173,12 +174,17 @@ function Projects() {
             <Reveal key={p.name} delay={i * 120} as="article" className="grid md:grid-cols-12 gap-4">
               <div className="md:col-span-7 hover-zoom">
                 <div className={`${i % 2 ? "bg-background border border-border" : "bg-background border border-border"} rounded-none p-2.5`}>
-                  <div className={`rounded-[1.15rem] overflow-hidden bg-background flex items-center justify-center ${p.name === "Holiday Inn Express" ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
+                  <div className={`relative rounded-[1.15rem] overflow-hidden bg-background flex items-center justify-center ${p.name === "Holiday Inn Express" ? "aspect-[4/3]" : "aspect-[16/10]"}`}>
                     {p.img ? (
                       <img src={p.img} alt={p.name} loading="lazy" width={1024} height={1024} className="size-full object-cover" />
                     ) : (
                       <span className="font-display text-lg md:text-xl text-clay/70 ">image to be updated</span>
                     )}
+                    {p.rera ? (
+                      <span className="absolute top-2 right-2 md:top-3 md:right-3 max-w-[calc(100%-1rem)] bg-background/90 backdrop-blur-sm px-2 py-1 font-mono text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-foreground">
+                        RERA: {p.rera}
+                      </span>
+                    ) : null}
                   </div>
                 </div>
               </div>
