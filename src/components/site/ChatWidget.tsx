@@ -19,10 +19,10 @@ export function ChatWidget() {
           </p>
           <div className="mt-4 space-y-2 text-sm">
             <a
-              href="tel:+919535624443"
+              href="tel:+919741808880"
               className="flex items-center gap-2.5 border border-border px-3 py-2.5 hover:bg-secondary transition-colors"
             >
-              <Phone size={15} aria-hidden /> +91 95356 24443
+              <Phone size={15} aria-hidden /> +91 97418 08880
             </a>
             <a
               href="mailto:info@dhruvija.com"

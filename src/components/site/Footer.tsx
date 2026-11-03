@@ -6,7 +6,7 @@ const socials: { label: string; href: string; Icon: LucideIcon }[] = [
   { label: "Instagram", href: "https://www.instagram.com/dhruvijaproperties/", Icon: Instagram },
   { label: "Facebook", href: "", Icon: Facebook },
   { label: "LinkedIn", href: "", Icon: Linkedin },
-  { label: "YouTube", href: "", Icon: Youtube },
+  { label: "YouTube", href: "https://www.youtube.com/@DhruvijaPropertiesLLP", Icon: Youtube },
 ];
 
 export function Footer() {
@@ -64,7 +64,7 @@ export function Footer() {
             <p className="font-mono uppercase tracking-widest text-xs text-background/50 mb-3">Reach</p>
             <ul className="space-y-2 text-background/80">
               <li><a href="mailto:info@dhruvija.com" className="hover:text-butter">info@dhruvija.com</a></li>
-              <li><a href="tel:+919535624443" className="hover:text-butter">+91 95356 24443</a></li>
+              <li><a href="tel:+919741808880" className="hover:text-butter">+91 97418 08880</a></li>
               <li><a href="tel:08041487175" className="hover:text-butter">080 - 4148 7175</a></li>
               <li><a href="tel:08029901062" className="hover:text-butter">080 - 2990 1062</a></li>
               <li className="pt-2">

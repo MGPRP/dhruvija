@@ -83,10 +83,10 @@ export function Nav() {
           )}
         </nav>
         <a
-          href="tel:+919535624443"
+          href="tel:+919741808880"
           className="border border-logo-properties/40 px-4 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-logo-properties hover:bg-logo-properties hover:text-background transition-colors"
         >
-          +91 95356 24443
+          +91 97418 08880
         </a>
       </div>
     </header>

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Connect | Contact Dhruvija Properties, Bengaluru" },
-      { name: "description", content: "Reach Dhruvija Properties LLP at Saroja Chamber, Seshadripuram, Bengaluru. Call +91 95356 24443 or write to info@dhruvija.com." },
+      { name: "description", content: "Reach Dhruvija Properties LLP at Saroja Chamber, Seshadripuram, Bengaluru. Call +91 97418 08880 or write to info@dhruvija.com." },
       { property: "og:title", content: "Say Hi | Contact Dhruvija Properties" },
       { property: "og:description", content: "Visit us at Seshadripuram, Bengaluru. Or call. Or write." },
       { property: "og:type", content: "website" },
@@ -221,7 +221,7 @@ function Contact() {
             <div className="rounded-none bg-background border border-border p-6 space-y-2">
               <span className="font-mono text-[0.65rem] uppercase tracking-widest">Reach us on</span>
               <a href="mailto:info@dhruvija.com" className="block font-display text-xl hover:underline">info@dhruvija.com</a>
-              <a href="tel:+919535624443" className="block font-display text-xl hover:underline">+91 95356 24443</a>
+              <a href="tel:+919741808880" className="block font-display text-xl hover:underline">+91 97418 08880</a>
               <div className="pt-1 text-xs text-foreground/70 space-y-0.5">
                 <p>Landline: <a href="tel:08041487175" className="hover:underline">080 - 4148 7175</a></p>
                 <p>Landline: <a href="tel:08029901062" className="hover:underline">080 - 2990 1062</a></p>
