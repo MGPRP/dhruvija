@@ -68,7 +68,7 @@ const albums: { folder: string; title: string; caption: string; order?: string[]
       // kitchen
       "I18A4249", "I18A4253", "I18A6072",
       // bedrooms
-      "I18A4216", "I18A4218", "I18A6061", "I18A6046", "I18A6065", "I18A4285", "I18A6103", "I18A6092", "I18A6095", "I18A6105",
+      "I18A4216", "I18A4218", "I18A6061", "I18A6046", "I18A6065", "I18A4285", "I18A6092", "I18A6095", "I18A6105",
       // bathrooms
       "I18A4229", "I18A4311", "I18A6050",
     ],

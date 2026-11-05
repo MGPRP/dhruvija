@@ -9,6 +9,8 @@ import founderAsset from "@/assets/narasimhamurthy.jpg";
 import ceoAsset from "@/assets/purushothama.jpg";
 const founderImg = founderAsset;
 const ceoImg = ceoAsset;
+// CEO profile is hidden for now; set to true to show it again.
+const SHOW_CEO = false;
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -186,6 +188,7 @@ function About() {
             </Reveal>
           </div>
 
+          {SHOW_CEO && (
           <div className="mt-16 grid md:grid-cols-12 gap-10 items-start">
             <Reveal className="md:col-span-7 md:order-1 order-2">
               <span className="font-bold font-mono text-[0.65rem] uppercase tracking-[0.22em] text-foreground/60">Chief Executive Officer</span>
@@ -210,6 +213,7 @@ function About() {
               </div>
             </Reveal>
           </div>
+          )}
         </div>
       </section>
 
